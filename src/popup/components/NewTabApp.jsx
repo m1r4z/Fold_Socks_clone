@@ -245,11 +245,26 @@ const NewTabApp = () => {
 				nightMode
 			);
 			if (data.timerSession) setTimerSession(data.timerSession);
+			else setDataInLocalStorage({ ...data, timerSession });
 			if (data.focusing != undefined) setFocusing(data.focusing);
+			else setDataInLocalStorage({ ...data, focusing });
 			if (data.nightMode != undefined) setNightMode(data.nightMode);
+			else setDataInLocalStorage({ ...data, nightMode });
 			if (data.timeDuration != undefined) setTimeDuration(data.timeDuration);
+			else setDataInLocalStorage({ ...data, timeDuration });
 			if (data.todos) setTodos(data.todos);
+			else setDataInLocalStorage({ ...data, todos });
 			if (data.websites) setWebsites(data.websites);
+			else setDataInLocalStorage({ ...data, websites });
+		} else {
+			setDataInLocalStorage({
+				nightMode,
+				focusing,
+				timeDuration,
+				timerSession,
+				todos,
+				websites,
+			});
 		}
 	};
 

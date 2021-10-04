@@ -43,25 +43,4 @@ const blockContent = (todoText) => `
 </div>
 `;
 
-//blockContent("Time to focus");
-
-const mountBlocker = (content) => {
-	console.log(content);
-	const check = setInterval(() => {
-		const { body } = document;
-
-		if (body) {
-			document.documentElement.innerHTML = "";
-			document.documentElement.style = "";
-			document.body.innerHTML = content;
-
-			clearInterval(check);
-		}
-	}, 1);
-};
-
-chrome.runtime.onMessage.addListener(function (request, sender, sendMessage) {
-	if (request.query === "BLOCK_PAGE") {
-		mountBlocker(blockContent(request.text));
-	}
-});
+blockContent("Time to focus");

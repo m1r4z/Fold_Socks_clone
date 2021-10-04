@@ -1,11 +1,12 @@
 {
 	"manifest_version": 2,
 	"version": "0.0.1",
-	"short_name": "React App",
-	"name": "Create React App Sample",
+	"short_name": "Fold Socks",
+	"name": "Fold Socks",
 	"description": "A minimalist distraction blocker to keep you on task.",
 	"background": {
-		"scripts": ["background.bundle.js"]
+		"scripts": ["background.bundle.js"],
+		"persistent": true
 	},
 
 	"chrome_url_overrides": {
@@ -31,6 +32,6 @@
 		"default_title": "Fold Socks"
 	},
 	"options_page": "options.html",
-	"permissions": ["activeTab", "storage", "unlimitedStorage"],
+	"permissions": ["activeTab", "tabs", "storage", "unlimitedStorage"],
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
