@@ -22,6 +22,7 @@ const FocusOrCountdown = ({
 	const createTimerSession = (duration) => {
 		let start = dayjs();
 		let end = start.add(duration, "m");
+		console.log("createTimerSession: ", start.valueOf(), end.valueOf());
 		return { start: start.valueOf(), end: end.valueOf() };
 	};
 

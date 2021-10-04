@@ -11,6 +11,8 @@ export const getTimeLeft = (timerSession) => {
 	const minutes = Math.floor(diffSeconds / 60);
 	const seconds = diffSeconds % 60;
 
+	//console.log(end, now.valueOf(), endTime.valueOf(), diffSeconds, minutes, seconds);
+
 	if (minutes < 0 || seconds < 0) {
 		return { minutes: -1, seconds: -1 };
 	}
@@ -30,13 +32,17 @@ const Time = ({ timerSession, setTimerSession, setFocusing }) => {
 	const [timer, setTimer] = useState({ minutes: 0, seconds: 0 });
 
 	const handleSetTime = () => {
+		//console.log("handleSetTime: ", timerSession);
 		const t = getTimeLeft(timerSession);
+		//console.log("getTimeLeft: ", t);
 		if (t.minutes < 0) {
 			setTimerSession({ start: dayjs().valueOf(), end: dayjs().valueOf() });
 			setFocusing(false);
 		} else {
 			setTimer(getTimeLeft(timerSession));
 		}
+		//console.log("handleSetTime: ", timerSession);
+		//console.log("handleSetTime: ", timer);
 	};
 
 	useEffect(() => {

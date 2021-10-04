@@ -3,10 +3,7 @@
 	"version": "0.0.1",
 	"short_name": "React App",
 	"name": "Create React App Sample",
-	"description": "Sample application showing how to create an extension with Create React App",
-	"browser_action": {
-		"default_title": "CRE"
-	},
+	"description": "A minimalist distraction blocker to keep you on task.",
 	"background": {
 		"scripts": ["background.bundle.js"]
 	},
@@ -21,11 +18,19 @@
 		}
 	],
 	"icons": {
-		"16": "img/icon-16.png",
-		"48": "img/icon-48.png",
-		"128": "img/icon-128.png"
+		"16": "fold_icon_white_16.png",
+		"32": "fold_icon_white_32.png",
+		"64": "fold_icon_white_64.png"
+	},
+	"browser_action": {
+		"default_icon": {
+			"16": "fold_icon_white_16.png",
+			"32": "fold_icon_white_32.png",
+			"64": "fold_icon_white_64.png"
+		},
+		"default_title": "Fold Socks"
 	},
 	"options_page": "options.html",
-	"permissions": ["activeTab"],
+	"permissions": ["activeTab", "storage", "unlimitedStorage"],
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

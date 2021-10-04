@@ -2,9 +2,9 @@ import * as React from "react";
 
 const TodoButton = ({ action, icon, nightMode, primary, hide }) => (
 	<div
-		className={`${hide && "todo-action"} flex br-pill ph2 pv1 pointer ${nightMode && "night"} ${
-			primary && "primary"
-		}`}
+		className={`${!hide && "todo-action"} flex br-pill ph2 pv1 pointer ${
+			nightMode && "night"
+		} ${primary && "primary"}`}
 		onClick={action}
 		onKeyPress={action}
 		role="button"
