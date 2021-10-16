@@ -8,6 +8,7 @@
 		"@testing-library/react": "^11.2.7",
 		"@testing-library/user-event": "^12.8.3",
 		"dayjs": "^1.10.7",
+		"extpay": "^3.0.0",
 		"framer-motion": "^4.1.17",
 		"material-icons": "^1.7.0",
 		"react": "^17.0.2",

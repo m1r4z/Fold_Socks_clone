@@ -3,7 +3,15 @@ import {
 	addLocalStorageChangeListener,
 	getDataFromLocalStorage,
 	setDataInLocalStorage,
+	setDataInStorage,
 } from "../common/storageUtil";
+
+let extpay = window.ExtPay("foldsocks");
+extpay.startBackground();
+
+extpay.getUser().then((user) => {
+	setDataInStorage({ paid: user.paid });
+});
 
 let badgeTextInterval;
 
@@ -152,4 +160,26 @@ chrome.tabs.onActivated.addListener(function (activeTabInfo) {
 
 addLocalStorageChangeListener(() => {
 	parseData(getDataFromLocalStorage());
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendMessage) => {
+	console.log(request);
+	if (request.query === "OPEN_EXTPAY") {
+		extpay.getUser().then((user) => {
+			setDataInStorage({ paid: user.paid });
+			if (!user.paid) {
+				extpay.openPaymentPage();
+			}
+		});
+	} else if (request.query === "CHECK_PAYMENT_STATUS") {
+		extpay.getUser().then((user) => {
+			setDataInStorage({ paid: user.paid });
+			sendMessage({ paid: user.paid });
+		});
+	}
+	return true;
+});
+
+extpay.onPaid.addListener((user) => {
+	setDataInStorage({ paid: user.paid });
 });

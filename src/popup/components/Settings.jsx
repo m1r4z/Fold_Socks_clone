@@ -10,6 +10,8 @@ const Settings = ({
 	focusing,
 	setTimeDuration,
 	nightMode,
+	subscriptionPaid,
+	handleOpenSubscriptionPage,
 }) => {
 	const minDuration = 1;
 	const maxDuration = 40;
@@ -20,7 +22,18 @@ const Settings = ({
 			<div className="line-top pt3 mt4 flex">
 				<div className="w-50 pr4">
 					<h2>Blocked Sites</h2>
-					<ButtonInput action={handleAddWebsite} buttonText="+ add website" small />
+					{subscriptionPaid ? (
+						<ButtonInput action={handleAddWebsite} buttonText="+ add website" small />
+					) : (
+						<div
+							className={`fs-red tc pv2 pv2 ph2 dib f5 w4 pointer bg-transition br-pill ba bw1 fs-bg-hover-red b-red ${
+								nightMode ? "fs-hover-black" : "fs-hover-white"
+							}`}
+							onClick={handleOpenSubscriptionPage}
+						>
+							Pay to add more Sites.
+						</div>
+					)}
 					<ul className="line-border br4 ph3 pv2 vh-50 mt2 overflow-y-scroll">
 						{websites.map((website, i) => (
 							<li

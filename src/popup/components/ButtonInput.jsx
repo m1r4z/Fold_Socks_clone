@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Todo from "./Todo";
 import LineInput from "./LineInput";
+import { getDataFromStorage } from "../../common/storageUtil";
 
 const MotionDiv = motion.div;
 
@@ -12,6 +13,12 @@ const ButtonInput = ({ action, buttonText, prependText, small, nightMode }) => {
 	const bgColorsInput = nightMode ? "fs-b-input-dark" : "fs-b-input-light";
 
 	const bgColorsButton = nightMode ? "fs-hover-black" : "fs-hover-white";
+
+	const handleSetShowInput = () => {
+		chrome.runtime.sendMessage({ query: "CHECK_PAYMENT_STATUS" }, (res) => {
+			setShowInput(res.paid);
+		});
+	};
 
 	return showInput ? (
 		<MotionDiv
@@ -26,7 +33,7 @@ const ButtonInput = ({ action, buttonText, prependText, small, nightMode }) => {
 	) : (
 		<div
 			role="button"
-			onClick={() => setShowInput(true)}
+			onClick={() => handleSetShowInput(true)}
 			className={`fs-red tc ${
 				small ? "pv2 ph2 dib" : "pv2 f5 w4"
 			} pointer bg-transition br-pill ba bw1 fs-bg-hover-red ${bgColorsButton} b-red`}

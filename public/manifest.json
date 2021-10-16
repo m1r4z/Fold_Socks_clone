@@ -5,7 +5,7 @@
 	"name": "Fold Socks",
 	"description": "A minimalist distraction blocker to keep you on task.",
 	"background": {
-		"scripts": ["background.bundle.js"],
+		"scripts": ["ExtPay.js", "background.bundle.js"],
 		"persistent": true
 	},
 
@@ -16,6 +16,11 @@
 		{
 			"matches": ["<all_urls>"],
 			"js": ["contentScript.bundle.js"]
+		},
+		{
+			"matches": ["https://extensionpay.com/*"],
+			"js": ["ExtPay.js"],
+			"run_at": "document_start"
 		}
 	],
 	"icons": {

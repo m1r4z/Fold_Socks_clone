@@ -24,3 +24,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+build.zip
+fold_socks_source.zip
+fold_socks.zip
