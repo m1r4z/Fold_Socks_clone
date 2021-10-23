@@ -26,7 +26,6 @@ const NewTabApp = () => {
 		start: dayjs().valueOf(),
 		end: dayjs().valueOf(),
 	});
-	const [subscriptionPaid, setSubscriptionPaid] = useState(false);
 
 	const [todos, setTodos] = useState({
 		current: [
@@ -271,10 +270,6 @@ const NewTabApp = () => {
 		}
 	};
 
-	const handleOpenSubscriptionPage = () => {
-		chrome.runtime.sendMessage({ query: "OPEN_EXTPAY" });
-	};
-
 	useEffect(() => {
 		todos.completed.forEach((todo) => {
 			const now = dayjs();
@@ -297,15 +292,6 @@ const NewTabApp = () => {
 		//init
 		let storageData = getDataFromLocalStorage();
 		syncStorageData(storageData);
-
-		addStorageChangeListener(() => {
-			getDataFromStorage().then((extStorageData) => {
-				setSubscriptionPaid(extStorageData.paid);
-			});
-		});
-		getDataFromStorage().then((extStorageData) => {
-			setSubscriptionPaid(extStorageData.paid);
-		});
 	}, []);
 
 	return (
@@ -347,8 +333,6 @@ const NewTabApp = () => {
 									timeDuration={timeDuration}
 									focusing={focusing}
 									setTimeDuration={handleSetTimeDuration}
-									subscriptionPaid={subscriptionPaid}
-									handleOpenSubscriptionPage={handleOpenSubscriptionPage}
 								/>
 							</MotionDiv>
 						) : (
@@ -370,23 +354,12 @@ const NewTabApp = () => {
 									handleSetText={handleSetText}
 									nightMode={nightMode}
 								/>
-								{subscriptionPaid || todos.current.length < 15 ? (
-									<ButtonInput
-										action={handleAddTodo}
-										buttonText="+ add task"
-										prependText={`${todos.current.length + 1}.`}
-										nightMode={nightMode}
-									/>
-								) : (
-									<div
-										className={`fs-red tc pv2 f5 w4 pointer bg-transition br-pill ba bw1 fs-bg-hover-red b-red ${
-											nightMode ? "fs-hover-black" : "fs-hover-white"
-										}`}
-										onClick={handleOpenSubscriptionPage}
-									>
-										Pay to add more Todo.
-									</div>
-								)}
+								<ButtonInput
+									action={handleAddTodo}
+									buttonText="+ add task"
+									prependText={`${todos.current.length + 1}.`}
+									nightMode={nightMode}
+								/>
 								<CompletedTodos
 									todos={todos}
 									handleDeleteCompletedTodo={handleDeleteCompletedTodo}
